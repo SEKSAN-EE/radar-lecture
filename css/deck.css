@@ -53,3 +53,7 @@ body{overflow:hidden;font-family:Helvetica,"Helvetica Neue",Arial,sans-serif;col
 /* section dividers: animated radar sweep */
 .divsweep{position:absolute;right:64px;top:446px;width:230px;height:230px;opacity:.9}
 .divsweep.top{top:300px;width:260px;height:260px}
+
+.ctrl.compact{padding:6px 12px;gap:4px}
+.ctrl.compact label{font-size:13px}
+.ctrl.compact .btns button{padding:4px 10px;font-size:13px}

@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="data:,">
 <title>Radar: How It Works, Where It Is Used, and My Research</title>
-<link rel="stylesheet" href="css/deck.css?v=1791902471">
+<link rel="stylesheet" href="css/deck.css?v=1791903021">
 </head>
 <body>
 <div id="bar"></div>
@@ -451,7 +451,7 @@
 <div class="shp" style="left:57.6px;top:619.2px;width:1161.6px;height:48.0px;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:2.88px 4.80px 2.88px 4.80px;box-sizing:border-box;"><p style="margin:0;margin-top:0.00px;margin-bottom:8.00px;text-align:left;line-height:1.2;"><span class="" style="font-size:22.67px;color:#14213D;font-weight:700;">Radar gives distance d and relative speed v → the controller keeps a safe time gap.</span></p></div></div>
 </section>
 <section class="slide s3d" data-scene="acc" data-notes="Answer to the opening question in 3D, with the radar&#x27;s own view. Left: the road scene; the orange cone is the radar beam of your car. Right: the range-Doppler map the radar computes. The car ahead is one bright cell: its range is the gap and its Doppler is the closing speed (positive when you approach it). Roadside poles are static, so they all sit at a closing speed equal to your own speed. The controller (same equations as the 2D simulation) follows the car ahead at a speed-dependent gap and returns to the set speed when the road is free. Try slowing the car ahead, or press Car cuts in. [~2.5 min]">
-<img class="logo" alt="" src="assets/57baa22b9c31.webp"><div class="ttl">Adaptive Cruise Control in 3D</div><div class="tag3d">3D · DRAG TO ROTATE</div><div class="stage" style="left:42px;top:112px;width:812px;height:552px"><canvas class="gl"></canvas><div class="hud"><div><span>Your speed</span><b id="c-v">–</b></div><div><span>Car ahead</span><b id="c-vl">–</b></div><div><span>Radar gap</span><b id="c-g">–</b></div><div><span>Mode</span><b id="c-m">–</b></div></div><div class="hint">drag: rotate · scroll: zoom · shift+drag: pan</div></div><div class="panel" style="left:872px;top:112px;width:366px"><div class="ctrl"><label>Set speed <em></em></label><input type="range" id="c-set" min="60" max="130" step="1" value="100"></div><div class="ctrl"><label>Car ahead speed <em></em></label><input type="range" id="c-lead" min="30" max="120" step="1" value="80"></div><div class="ctrl"><label>Events</label><div class="btns"><button data-ev="cut">Car cuts in</button><button data-ev="reset">Reset</button></div></div><canvas class="rd" width="420" height="248" style="width:366px;height:216px;border-radius:6px;border:1px solid #14213D;display:block"></canvas><div class="card3 "><h4>What the radar sees</h4><p>The car ahead is one bright cell: range = gap, Doppler = closing speed. Static roadside poles line up at your own speed.</p></div></div><div class="snbox"><span class="sn"></span></div>
+<img class="logo" alt="" src="assets/57baa22b9c31.webp"><div class="ttl">Adaptive Cruise Control in 3D</div><div class="tag3d">3D · DRAG TO ROTATE</div><div class="stage" style="left:42px;top:112px;width:812px;height:552px"><canvas class="gl"></canvas><div class="hud"><div><span>Your speed</span><b id="c-v">–</b></div><div><span>Car ahead</span><b id="c-vl">–</b></div><div><span>Radar gap</span><b id="c-g">–</b></div><div><span>Mode</span><b id="c-m">–</b></div></div><div class="hint">drag: rotate · scroll: zoom · shift+drag: pan</div></div><div class="panel" style="left:872px;top:112px;width:366px"><div class="ctrl compact"><label>Set speed <em></em></label><input type="range" id="c-set" min="60" max="130" step="1" value="100"></div><div class="ctrl compact"><label>Car ahead speed <em></em></label><input type="range" id="c-lead" min="30" max="120" step="1" value="80"></div><div class="ctrl compact"><label>Events</label><div class="btns"><button data-ev="cut">Car cuts in</button><button data-ev="reset">Reset</button></div></div><div class="ctrl compact"><label>Radar returns</label><div class="btns"><button data-st="0" class="on">All returns</button><button data-st="1">Static removed</button></div></div><canvas class="rd" width="420" height="222" style="width:366px;height:186px;border-radius:6px;border:1px solid #14213D;display:block"></canvas><div class="card3 "><h4>What the radar sees</h4><p>The car ahead is one bright cell: range = gap, Doppler = closing speed. Static objects appear at your own speed; ACC removes them.</p></div></div><div class="snbox"><span class="sn"></span></div>
 </section>
 <section class="slide" data-notes="[~2.5 min] Cars use several radars. A long-range radar looks far ahead in a narrow beam for ACC and emergency braking. Mid-range radars cover cut-in and lane changes. Short-range corner radars cover blind spots, parking and cross traffic. In-cabin radars detect a forgotten child. New 4D imaging radars add elevation to range, velocity and azimuth. All of this is FMCW, exactly as in Part 3. Coverage figures are typical values.">
 <img class="pic" loading="lazy" alt="" src="assets/57baa22b9c31.webp" style="left:1058.59px;top:29.14px;width:189.41px;height:50.67px;">
@@ -885,19 +885,19 @@
 <div id="notes"></div>
 <div id="chrome"><button id="prev">&larr; Prev</button><span id="pos"></span><button id="next">Next &rarr;</button><button id="nbtn" title="Speaker notes (N)">Notes</button><button id="fsbtn" title="Fullscreen (F)">Fullscreen</button><span id="brand">Radar lecture &middot; S. Eiadkaew &middot; iDEMT, KMUTNB &middot; arrows to navigate, N notes, F fullscreen</span></div>
 <script src="lib/three.min.js"></script>
-<script src="js/deck.js?v=1791902471"></script>
-<script src="js/common3d.js?v=1791902471"></script>
-<script src="js/scenes/s01_pulse.js?v=1791902471"></script>
-<script src="js/scenes/s02_rdsurface.js?v=1791902471"></script>
-<script src="js/scenes/s03_angle.js?v=1791902471"></script>
-<script src="js/scenes/s04_rotating.js?v=1791902471"></script>
-<script src="js/scenes/s05_phased.js?v=1791902471"></script>
-<script src="js/scenes/s06_mimo.js?v=1791902471"></script>
-<script src="js/scenes/s07_acc.js?v=1791902471"></script>
-<script src="js/scenes/s08_sar.js?v=1791902471"></script>
-<script src="js/scenes/s09_weather.js?v=1791902471"></script>
-<script src="js/scenes/s10_gpr.js?v=1791902471"></script>
-<script src="js/scenes/s11_vitals.js?v=1791902471"></script>
-<script src="js/scenes/s12_urban.js?v=1791902471"></script>
+<script src="js/deck.js?v=1791903021"></script>
+<script src="js/common3d.js?v=1791903021"></script>
+<script src="js/scenes/s01_pulse.js?v=1791903021"></script>
+<script src="js/scenes/s02_rdsurface.js?v=1791903021"></script>
+<script src="js/scenes/s03_angle.js?v=1791903021"></script>
+<script src="js/scenes/s04_rotating.js?v=1791903021"></script>
+<script src="js/scenes/s05_phased.js?v=1791903021"></script>
+<script src="js/scenes/s06_mimo.js?v=1791903021"></script>
+<script src="js/scenes/s07_acc.js?v=1791903021"></script>
+<script src="js/scenes/s08_sar.js?v=1791903021"></script>
+<script src="js/scenes/s09_weather.js?v=1791903021"></script>
+<script src="js/scenes/s10_gpr.js?v=1791903021"></script>
+<script src="js/scenes/s11_vitals.js?v=1791903021"></script>
+<script src="js/scenes/s12_urban.js?v=1791903021"></script>
 </body>
 </html>

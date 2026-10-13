@@ -13,9 +13,10 @@ Scenes.register('acc',function(root){
   const cn=new T.Mesh(cg,new T.MeshBasicMaterial({color:C3.org,transparent:true,opacity:.28,side:T.DoubleSide,depthWrite:false}));cn.position.set(0,0.45,-2.3);S.add(cn);
   const ping=new T.Mesh(new T.RingGeometry(.9,1.0,40),new T.MeshBasicMaterial({color:C3.org,transparent:true,opacity:.5,side:T.DoubleSide,depthWrite:false}));ping.position.y=.9;S.add(ping);
   const gl=lbl('Car ahead','#14213D',.8);S.add(gl);const el=lbl('Your car + radar','#14213D',.7);S.add(el);
-  let vset=100/3.6,vl=80/3.6,vv=100/3.6,gap=55,dist=0,tm=0,hist=[];const hud={v:root.querySelector('#c-v'),vl:root.querySelector('#c-vl'),g:root.querySelector('#c-g'),m:root.querySelector('#c-m')};
+  let staticOff=false,vset=100/3.6,vl=80/3.6,vv=100/3.6,gap=55,dist=0,tm=0,hist=[];const hud={v:root.querySelector('#c-v'),vl:root.querySelector('#c-vl'),g:root.querySelector('#c-g'),m:root.querySelector('#c-m')};
   const hc=root.querySelector('canvas.hist'),hg=hc&&hc.getContext('2d');
   bindRange(root,'#c-set',x=>{vset=x/3.6;},x=>x+' km/h');bindRange(root,'#c-lead',x=>{vl=x/3.6;},x=>x+' km/h');
+  bindBtns(root,'[data-st]',x=>{staticOff=x==='1';});
   bindBtns(root,'[data-ev]',x=>{if(x==='cut')gap=22;if(x==='reset'){vv=vset;gap=55;hist=[];}});
   function drawHist(){if(!hc)return;const w=hc.width,h=hc.height;hg.clearRect(0,0,w,h);hg.fillStyle='#fff';hg.fillRect(0,0,w,h);hg.strokeStyle='#D0D5DD';hg.lineWidth=1;
     for(let k=0;k<=3;k++){const y=8+(h-24)*k/3;hg.beginPath();hg.moveTo(30,y);hg.lineTo(w-6,y);hg.stroke();hg.fillStyle='#6B7585';hg.font='10px Helvetica,Arial';hg.fillText(String(140-k*40),2,y+3);}
@@ -31,8 +32,11 @@ Scenes.register('acc',function(root){
     rg2.clearRect(0,0,RW,RH);rg2.fillStyle='#0b1730';rg2.fillRect(0,0,RW,RH);
     const cw=PW/NC,ch=PH/NR,blobs=[];
     blobs.push({r:gapv,c:closing,a:Math.min(1.25,2.2*Math.pow(30/Math.max(gapv,8),0.8)),sr:5,sc:1.6});            // lead car
-    for(let k=1;k<=11;k++){const r=k*14-(distv%14);if(r>6&&r<RMAX)blobs.push({r:r,c:vown,a:0.5*Math.pow(40/r,0.9),sr:3.2,sc:1.4});} // static roadside poles
-    blobs.push({r:RMAX*0.5,c:vown,a:0.16,sr:RMAX*0.45,sc:2.4});                                                  // ground clutter ridge
+    if(!staticOff){for(let k=1;k<=12;k++){const rl=k*14-(distv%14);if(rl<6)continue;const LAT=5.2,phi=Math.atan2(LAT,rl),rr=Math.hypot(rl,LAT);   // pole beside the road
+        const inBeam=Math.exp(-Math.pow(Math.max(0,phi*180/Math.PI-10)/4,2));                                   // narrow forward beam (about +-10 deg)
+        const flick=0.65+0.35*Math.sin(k*2.7+performance.now()/700);
+        if(rr<RMAX)blobs.push({r:rr,c:vown*Math.cos(phi),a:0.42*Math.pow(40/rr,1.0)*inBeam*flick,sr:3.0,sc:1.2});}
+      blobs.push({r:RMAX*0.55,c:vown,a:0.09,sr:RMAX*0.5,sc:1.6});}                                              // weak ground clutter
     for(let i=0;i<NC;i++)for(let j=0;j<NR;j++){const r=(i+.5)/NC*RMAX,c=VMAX-(j+.5)/NR*(VMAX-VMIN);let e=0.07+0.06*Math.abs(Math.sin(i*12.9898+j*78.233+Math.floor(performance.now()/90)*0.7));
       for(const b of blobs){const dr=(r-b.r)/b.sr,dc=(c-b.c)/b.sc;e+=b.a*Math.exp(-0.5*(dr*dr+dc*dc));}
       const t=turbo(Math.min(1,e));rg2.fillStyle='rgb('+((t.r*255)|0)+','+((t.g*255)|0)+','+((t.b*255)|0)+')';rg2.fillRect(ML+i*cw,MT+j*ch,cw+0.6,ch+0.6);}
@@ -46,7 +50,7 @@ Scenes.register('acc',function(root){
     // detected target
     const tx=xr(gapv),ty=yv(closing);rg2.strokeStyle=brake?'#ff5a4a':'#ffd24a';rg2.lineWidth=2;rg2.strokeRect(tx-14,ty-11,28,22);
     rg2.fillStyle=brake?'#ff8a7a':'#ffd24a';rg2.font='bold 12px Helvetica,Arial';rg2.textAlign=tx>ML+PW*0.55?'right':'left';rg2.fillText('car ahead',tx+(tx>ML+PW*0.55?-18:18),ty-6);
-    rg2.fillStyle='#ffffffe0';rg2.font='11px Helvetica,Arial';rg2.textAlign='right';rg2.fillText('roadside poles (static)',ML+PW-4,yv(vown)-8);
+    rg2.fillStyle='#ffffffe0';rg2.font='11px Helvetica,Arial';rg2.textAlign='right';rg2.fillText(staticOff?'static returns removed (own speed known)':'roadside poles (static)',ML+PW-4,yv(vown)-8);
     rg2.fillStyle='#fff';rg2.font='bold 12px Helvetica,Arial';rg2.textAlign='left';rg2.fillText('Range–Doppler map: what the radar sees',ML,16);
   }
   v.tick=function(dt){tm+=dt;const h=0.02;let n=Math.max(1,Math.round(dt/h)),mode='CRUISE',a=0;
