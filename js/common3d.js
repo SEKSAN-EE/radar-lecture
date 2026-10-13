@@ -41,7 +41,7 @@ window.car=function(color,len){len=len||4.4;const g=new T.Group();const m=mat(co
   const tl=new T.Mesh(new T.BoxGeometry(1.5,.18,.06),new T.MeshStandardMaterial({color:0x550000,emissive:0xff0000,emissiveIntensity:0}));tl.position.set(0,.8,len/2+.01);g.add(tl);g.userData.brake=tl;
   return g;};
 window.cone=function(len,ang,color,op){ // wedge/cone pointing +x
-  const r=len*Math.tan(ang);const g=new T.ConeGeometry(r,len,28,1,true);g.translate(0,-len/2,0);g.rotateZ(-Math.PI/2);
+  const r=len*Math.tan(ang);const g=new T.ConeGeometry(r,len,28,1,true);g.translate(0,-len/2,0);g.rotateZ(Math.PI/2);
   const m=new T.Mesh(g,new T.MeshBasicMaterial({color:color||0xed7d31,transparent:true,opacity:op||.16,side:T.DoubleSide,depthWrite:false}));return m;};
 window.line3=function(pts,color,op){const g=new T.BufferGeometry().setFromPoints(pts);return new T.Line(g,new T.LineBasicMaterial({color:color||0x14213d,transparent:op!==undefined,opacity:op===undefined?1:op}));};
 window.fmt=(v,d)=>v.toFixed(d===undefined?1:d);

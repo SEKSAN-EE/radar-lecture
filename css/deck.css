@@ -51,4 +51,5 @@ body{overflow:hidden;font-family:Helvetica,"Helvetica Neue",Arial,sans-serif;col
 .s3d .sn,.sn{font-size:14.6px}
 .snbox{position:absolute;left:1160px;top:672px;width:100px;text-align:right;font-size:14.6px;color:var(--mid)}
 /* section dividers: animated radar sweep */
-.divsweep{position:absolute;right:60px;top:200px;width:430px;height:430px}
+.divsweep{position:absolute;right:64px;top:446px;width:230px;height:230px;opacity:.9}
+.divsweep.top{top:300px;width:260px;height:260px}

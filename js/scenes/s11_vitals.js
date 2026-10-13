@@ -14,9 +14,9 @@ Scenes.register('vitals',function(root){
   // radar
   const rad=new T.Group();const rb=new T.Mesh(new T.BoxGeometry(2.6,1.8,.8),mat(0x14213d));rad.add(rb);const rpcb=new T.Mesh(new T.BoxGeometry(2.2,1.4,.12),mat(C3.green));rpcb.position.z=-.45;rad.add(rpcb);rad.position.set(0,2.8,14);S.add(rad);
   const rl=lbl('mmWave radar (60 GHz)','#14213D',.9);rl.position.set(0,5.2,14);S.add(rl);
-  const cnn=cone(11.5,0.12,C3.org,.18);cnn.rotation.y=-Math.PI/2;cnn.position.set(0,2.8,13.6);S.add(cnn);
+  const cnn=cone(11.5,0.12,C3.org,.18);cnn.rotation.y=Math.PI/2;cnn.position.set(0,2.8,13.6);S.add(cnn);
   const rings=[];for(let i=0;i<4;i++){const r=new T.Mesh(new T.RingGeometry(.9,1.0,32),new T.MeshBasicMaterial({color:C3.org,transparent:true,opacity:0,side:T.DoubleSide,depthWrite:false}));S.add(r);rings.push(r);}
-  const chestL=lbl('chest wall','#14213D',.9);chestL.position.set(-5.2,3.4,2.2);S.add(chestL);
+  const chestL=lbl('chest wall','#14213D',.9);chestL.position.set(-6.2,-0.6,2.2);S.add(chestL);
   let br=15,hr=72,ex=200,tm=0;const fs=20,Nbuf=fs*20;const xb=[],pb=[];const lam=5;      // mm
   const hud={x:root.querySelector('#v-x'),p:root.querySelector('#v-p'),rr:root.querySelector('#v-rr'),hr:root.querySelector('#v-hr')};
   const c1=root.querySelector('canvas.wave'),g1=c1.getContext('2d'),c2=root.querySelector('canvas.spec'),g2=c2.getContext('2d');

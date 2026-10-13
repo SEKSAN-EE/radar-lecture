@@ -1,6 +1,6 @@
 Scenes.register('mimo',function(root){
   const T=THREE,canvas=root.querySelector('canvas.gl');
-  const v=makeView(canvas,{th:0.35,ph:0.28,dist:30,target:new T.Vector3(0,-0.3,0),minD:14,maxD:90,bg:0xf3f6fa});
+  const v=makeView(canvas,{th:0.35,ph:0.28,dist:34,target:new T.Vector3(0,2.2,0),minD:14,maxD:90,bg:0xf3f6fa});
   const S=v.scene;addLights(S);
   let nTx=2,mode='tdm',tm=0;const NRX=4,D=1.6;
   const grp=new T.Group();S.add(grp);

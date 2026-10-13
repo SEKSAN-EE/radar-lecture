@@ -9,7 +9,7 @@ Scenes.register('rotating',function(root){
   // beam wedge (flat on ground) + volumetric cone
   let bw=8;const wedgeG=()=>new T.CircleGeometry(RMAX,24,-(bw*Math.PI/180)/2,bw*Math.PI/180);
   const wedge=new T.Mesh(wedgeG(),new T.MeshBasicMaterial({color:0xed7d31,transparent:true,opacity:.35,side:T.DoubleSide,depthWrite:false}));wedge.rotation.x=-Math.PI/2;wedge.position.y=0.08;S.add(wedge);
-  const beamLine=line3([new T.Vector3(0,3,0),new T.Vector3(RMAX,3,0)],0xed7d31);S.add(beamLine);
+  const HD=(3.5+1.7*0.55)*1.5;const beamLine=line3([new T.Vector3(0,HD,0),new T.Vector3(RMAX,HD,0)],0xed7d31);S.add(beamLine);
   // targets
   const ts=[];for(let i=0;i<5;i++){const m=aircraft(i==1?C3.red:C3.navy,1.4);m.position.y=5;S.add(m);ts.push({m,r:10+i*6.5,a:i*1.3,w:(i%2?-1:1)*(0.05+0.015*i),vr:(i%3-1)*0.05,blip:0});}
   // clutter (static)
@@ -28,7 +28,7 @@ Scenes.register('rotating',function(root){
   const nrm=a=>((a%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
   v.tick=function(dt){const da=rpm*2*Math.PI/60*dt;const a0=ang;ang=nrm(ang+da);
     pan.rotation.y=Math.PI/2-ang;wedge.rotation.z=ang;   // CircleGeometry in XY -> after rot.x it lies on XZ ; rotate about up axis
-    const dir=new T.Vector3(Math.cos(ang),0,Math.sin(ang));const bp=beamLine.geometry.attributes.position;bp.setXYZ(1,dir.x*RMAX,3,dir.z*RMAX);bp.needsUpdate=true;
+    const dir=new T.Vector3(Math.cos(ang),0,Math.sin(ang));const bp=beamLine.geometry.attributes.position;bp.setXYZ(1,dir.x*RMAX,HD,dir.z*RMAX);bp.needsUpdate=true;
     wedge.rotation.set(-Math.PI/2,0,0);wedge.rotateZ(-ang);
     const half=bw*Math.PI/360;det=0;
     ts.forEach(o=>{o.a=nrm(o.a+o.w*dt);o.r+=o.vr*dt;if(o.r>RMAX-3||o.r<6)o.vr*=-1;o.m.position.set(o.r*Math.cos(o.a),5,o.r*Math.sin(o.a));o.m.rotation.y=-(o.a+Math.PI/2+(o.w>0?0:Math.PI));

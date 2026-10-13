@@ -14,7 +14,7 @@ slides.forEach((s,i)=>s.querySelectorAll('.sn').forEach(e=>e.textContent=i+1));
 function preload(i){const s=slides[i];if(!s)return;s.querySelectorAll('img[loading=lazy]').forEach(im=>{im.loading='eager';});}
 function show(i){
   i=Math.max(0,Math.min(TOTAL-1,i));slides[cur].classList.remove('on');cur=i;const s=slides[cur];s.classList.add('on');
-  preload(cur);preload(cur+1);
+  preload(cur);preload(cur+1);preload(cur+2);preload(cur+3);
   $('#pos').textContent=(cur+1)+' / '+TOTAL;$('#bar').style.width=(100*(cur+1)/TOTAL)+'%';
   for(const k in SC){const e=SC[k];if(e.view)e.view.active=false;}
   const sc=s.dataset.scene;
@@ -63,7 +63,7 @@ window.lbl=function(text,color,size,bg){
   const sp=new T.Sprite(new T.SpriteMaterial({map:t,depthTest:false,transparent:true}));sp.scale.set(size*w/c.height,size,1);sp.renderOrder=10;return sp;};
 window.bindRange=function(root,sel,cb,fmt){const el=root.querySelector(sel);const out=el.parentElement.querySelector('em');
   const f=()=>{const v=parseFloat(el.value);if(out)out.textContent=fmt?fmt(v):v;cb(v);};el.addEventListener('input',f);f();return el;};
-window.bindBtns=function(root,sel,cb){const bs=[...root.querySelectorAll(sel)];bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.classList.toggle('on',x===b));cb(b.dataset.v,b);});return bs;};
+window.bindBtns=function(root,sel,cb){const attr=sel.replace(/[\[\]]/g,'');const bs=[...root.querySelectorAll(sel)];bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.classList.toggle('on',x===b));cb(b.getAttribute(attr),b);});return bs;};
 /* ---------- divider sweep (2D canvas) ---------- */
 function drawSweep(c,t){const w=c.width,h=c.height,g=c.getContext('2d');g.clearRect(0,0,w,h);const cx=w/2,cy=h/2,R=w/2-6;
   g.lineWidth=2;g.strokeStyle='#D0D5DD';for(let i=1;i<=4;i++){g.beginPath();g.arc(cx,cy,R*i/4,0,7);g.stroke();}
@@ -80,6 +80,6 @@ function frame(now){const dt=Math.min(0.1,(now-last)/1000);last=now;clock+=dt;
   requestAnimationFrame(frame);}
 new ResizeObserver(()=>{fitDeck();for(const k in SC){const v=SC[k].view;v&&v.active&&v.resize();}}).observe(document.body);
 fitDeck();
-window.addEventListener('load',()=>{const h=parseInt(location.hash.slice(1));show(isNaN(h)?0:h-1);requestAnimationFrame(frame);});
-window.__show=show;
+window.addEventListener('load',()=>{setTimeout(()=>document.querySelectorAll('img[loading=lazy]').forEach(im=>{im.loading='eager';}),1200);const h=parseInt(location.hash.slice(1));show(isNaN(h)?0:h-1);requestAnimationFrame(frame);});
+window.__show=show;window.__scenes=SC;
 })();

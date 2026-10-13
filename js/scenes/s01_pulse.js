@@ -5,7 +5,7 @@ Scenes.register('pulse',function(root){
   const grid=new T.GridHelper(600,60,0xc4d0dc,0xd3dde7);grid.position.y=0.02;S.add(grid);
   const tw=radarTower(7,2.2);tw.scale.setScalar(2);S.add(tw);tw.userData.pan.rotation.y=Math.PI/2;       // dish faces +x
   const targ=aircraft(C3.navy,3);S.add(targ);const tl=lbl('target','#14213D',2.2);S.add(tl);
-  const rl=lbl('radar','#14213D',2.2);rl.position.set(0,26,0);S.add(rl);
+  const rl=lbl('radar','#14213D',2.2);rl.position.set(0,27,0);S.add(rl);
   // path line + range ruler
   const ruler=line3([new T.Vector3(0,0.3,0),new T.Vector3(1,0.3,0)],0x14213d);S.add(ruler);
   const mkPacket=(c)=>{const m=new T.Mesh(new T.CylinderGeometry(1.1,1.1,4,16),new T.MeshBasicMaterial({color:c,transparent:true,opacity:.9}));m.rotation.z=Math.PI/2;m.visible=false;S.add(m);
@@ -13,7 +13,7 @@ Scenes.register('pulse',function(root){
   const tx=mkPacket(C3.org),rx=mkPacket(C3.blue);
   const ringG=new T.RingGeometry(0.9,1,64);ringG.rotateX(-Math.PI/2);
   const rings=[];for(let i=0;i<3;i++){const r=new T.Mesh(ringG,new T.MeshBasicMaterial({color:C3.org,transparent:true,opacity:0,side:T.DoubleSide,depthWrite:false}));r.position.y=0.15;S.add(r);rings.push(r);}
-  const beam=cone(80,0.06,C3.org,.1);beam.position.set(0,15,0);S.add(beam);
+  const beam=cone(80,0.06,C3.org,.1);beam.position.set(0,16.4,0);S.add(beam);
   // state
   let R=60,speedK=1,t=0,hitT=-9,echoT=-9;const VIS=26; // visual units / s
   const hud={R:root.querySelector('#p-R'),td:root.querySelector('#p-td'),rt:root.querySelector('#p-rt')};
@@ -32,11 +32,11 @@ Scenes.register('pulse',function(root){
     t+=dt*speedK;const rw=Rw(),rt=2*rw/VIS,cyc=Math.max(rt+1.4,3.2);const tt=t%cyc;
     // camera target eases toward mid-range
     v.target.x+=((rw/2)-v.target.x)*Math.min(1,dt*3);if(!v.drag)v.dist+=((Math.max(60,rw*2.0))-v.dist)*Math.min(1,dt*2);
-    targ.position.set(rw,12+Math.sin(t*1.3)*0.6,0);targ.rotation.y=Math.PI;tl.position.set(rw,17,0);
+    targ.position.set(rw,16.4+Math.sin(t*1.3)*0.5,0);targ.rotation.y=Math.PI;tl.position.set(rw,21.5,0);
     const pos=ruler.geometry.attributes.position;pos.setXYZ(1,rw,0.3,0);pos.needsUpdate=true;
     tx.visible=tt<rw/VIS;rx.visible=tt>=rw/VIS&&tt<rt;
-    if(tx.visible){tx.position.set(VIS*tt,15,0);}
-    if(rx.visible){rx.position.set(rw-VIS*(tt-rw/VIS),15,0);}
+    if(tx.visible){tx.position.set(VIS*tt,16.4,0);}
+    if(rx.visible){rx.position.set(rw-VIS*(tt-rw/VIS),16.4,0);}
     rings.forEach((r,i)=>{const a=tt-i*0.35;if(a>0&&a<2.2){const s=1+a*VIS*0.8;r.scale.set(s,1,s);r.material.opacity=0.35*(1-a/2.2);}else r.material.opacity=0;});
     const flash=tt>=rw/VIS&&tt<rw/VIS+0.5?1-(tt-rw/VIS)/0.5:0;
     targ.children.forEach(c=>{if(c.material&&c.material.emissive)c.material.emissive.setRGB(flash*.9,flash*.35,0);});

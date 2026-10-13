@@ -1,6 +1,6 @@
 Scenes.register('angle',function(root){
   const T=THREE,canvas=root.querySelector('canvas.gl');
-  const v=makeView(canvas,{th:0.18,ph:1.05,dist:21,target:new T.Vector3(0,0,3.5),minD:9,maxD:50,bg:0xeaf1f8});
+  const v=makeView(canvas,{th:0.1,ph:1.15,dist:15,target:new T.Vector3(0,0,3.2),minD:8,maxD:45,bg:0xeaf1f8});
   const S=v.scene;addLights(S);groundPlane(S,200,0xdfe8f0,-0.9);
   const LAM=2,D=1;                         // wavelength 2 units, spacing lambda/2 = 1 unit
   let N=4,th=25,waves=true,tm=0;
@@ -15,7 +15,7 @@ Scenes.register('angle',function(root){
   const axisL=lbl('broadside','#6B7585',.9);axisL.position.set(0,.2,5.6);S.add(axisL);
   const bs=line3([new T.Vector3(0,-.4,0),new T.Vector3(0,-.4,6)],0x9aa4b2,.8);S.add(bs);
   function buildArray(){while(antG.children.length)antG.remove(antG.children[0]);dd.children.slice().forEach(c=>dd.remove(c));
-    for(let k=0;k<N;k++){const x=(k-(N-1)/2)*D;const a=new T.Mesh(new T.ConeGeometry(.32,.8,4),mat(C3.blue));a.rotation.x=Math.PI/2;a.rotation.z=Math.PI/4;a.position.set(x,0,0);antG.add(a);}}
+    for(let k=0;k<N;k++){const x=(k-(N-1)/2)*D;const a=new T.Mesh(new T.ConeGeometry(.5,1.1,4),mat(C3.blue));a.rotation.x=Math.PI/2;a.rotation.z=Math.PI/4;a.position.set(x,0,0);antG.add(a);}}
   const cv=root.querySelector('canvas.phasor'),cg=cv.getContext('2d'),sp=root.querySelector('canvas.spec'),sg=sp.getContext('2d');
   const hud={th:root.querySelector('#a-th'),dd:root.querySelector('#a-dd'),ph:root.querySelector('#a-ph'),est:root.querySelector('#a-est')};
   bindRange(root,'#a-theta',x=>{th=x;},x=>x+'°');

@@ -30,7 +30,7 @@ Scenes.register('acc',function(root){
     tex.offset.y=(dist/5)%1;
     poles.forEach(o=>{let z=o.z0+(dist%(24*14));if(z>8)z-=24*14;o.p.position.z=z;});
     const be=a<-0.4?1:0;ego.userData.brake.material.emissiveIntensity=be*1.2;
-    ping.position.z=-2.3-((tm*38)%(gap+2));ping.rotation.y=Math.PI/2;ping.scale.setScalar(0.6+((tm*38)%(gap+2))*0.02);ping.material.opacity=0.55*(1-((tm*38)%(gap+2))/(gap+2));
+    ping.position.z=-2.3-((tm*38)%(gap+2));ping.rotation.y=Math.PI/2;ping.scale.setScalar(0.5+((tm*38)%(gap+2))*0.012);ping.material.opacity=0.45*(1-((tm*38)%(gap+2))/(gap+2));
     cn.scale.set(Math.min(1,(gap+5)/80),1,1);
     v.target.set(0,1.5,-Math.min(gap,60)*0.25-3);gl.position.set(0,3.4,-gap-4.4);el.position.set(0,3.3,0);
     hud.v.textContent=(vv*3.6).toFixed(0)+' km/h';hud.vl.textContent=(vl*3.6).toFixed(0)+' km/h';hud.g.textContent=gap.toFixed(0)+' m';hud.m.textContent=mode;
