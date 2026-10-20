@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="data:,">
 <title>Radar: How It Works, Where It Is Used, and My Research</title>
-<link rel="stylesheet" href="css/deck.css?v=1791903021">
+<link rel="stylesheet" href="css/deck.css?v=1792478725">
 </head>
 <body>
 <div id="bar"></div>
@@ -480,8 +480,8 @@
 <div class="shp" style="left:52.8px;top:604.8px;width:768.0px;height:62.4px;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:2.88px 4.80px 2.88px 4.80px;box-sizing:border-box;"><p style="margin:0;margin-top:0.00px;margin-bottom:8.00px;text-align:left;line-height:1.2;"><span class="" style="font-size:21.33px;color:#14213D;font-weight:700;">Many pulses along the path are combined → very fine azimuth resolution</span></p></div></div>
 <div class="shp" style="left:28.8px;top:681.6px;width:1123.2px;height:28.8px;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:2.88px 4.80px 2.88px 4.80px;box-sizing:border-box;"><p style="margin:0;margin-top:0.00px;margin-bottom:8.00px;text-align:left;line-height:1.2;"><span class="" style="font-size:13.33px;color:#6B7585;">Image credits: Wclxs11 (CC BY-SA 3.0) · Rama (CC BY-SA 2.0 fr)</span></p></div></div>
 </section>
-<section class="slide s3d" data-scene="sar" data-notes="The satellite flies along its track; the orange footprint on the ground moves with it. While the red target is inside the footprint, every echo is stored (orange spheres + rays). Together they form the synthetic aperture L. Make the antenna D smaller: the footprint gets longer along-track, the aperture grows and the final azimuth resolution (D/2) improves. Not to scale. [~2 min]">
-<img class="logo" alt="" src="assets/57baa22b9c31.webp"><div class="ttl">Synthetic Aperture in 3D</div><div class="tag3d">3D · DRAG TO ROTATE</div><div class="stage" style="left:42px;top:112px;width:812px;height:552px"><canvas class="gl"></canvas><div class="hud"><div><span>Aperture L</span><b id="s-L">–</b></div><div><span>Antenna D</span><b id="s-d">–</b></div><div><span>Azimuth resolution</span><b id="s-r">–</b></div></div><div class="hint">drag: rotate · scroll: zoom · shift+drag: pan</div></div><div class="panel" style="left:872px;top:112px;width:366px"><div class="ctrl"><label>Antenna length D <em></em></label><input type="range" id="s-D" min="2" max="12" step="1" value="6"></div><div class="ctrl"><label>Satellite</label><div class="btns"><button data-pl="1" class="on">Play</button><button data-pl="0">Pause</button><button data-pl="r">Restart</button></div></div><div class="ctrl"><label>Azimuth response</label><canvas class="resp" width="330" height="96"></canvas></div><div class="card3 "><h4>Synthetic aperture</h4><p>While the target is inside the beam, the radar keeps collecting echoes. Combined, they act like one very long antenna.</p><div class="eq">L ≈ λR / D</div></div><div class="card3 lb"><h4>Surprise</h4><p>A smaller antenna sees the target for longer, so the synthetic aperture is longer and the final resolution is D / 2.</p></div></div><div class="snbox"><span class="sn"></span></div>
+<section class="slide s3d" data-scene="sar" data-notes="Step-by-step SAR in 3D. 1) A single pulse: the beam footprint on the ground (orange) is long, so the two close red targets fall in the same footprint and give one grey blur (see the grey curve and the grey ribbon). 2) Press Play and keep &#x27;Follow pass&#x27;: while the satellite flies over, every orange sphere is one position where it recorded an echo from BOTH targets (orange lines). 3) The more echoes are combined, the narrower the orange image becomes: at the end the two targets are separate peaks. Use Before/After to compare directly, and Close-up to look at the ribbons near the targets. Change antenna length D: a smaller antenna has a wider footprint, so more echoes are combined and the final width (D/2) improves. Stylised, not to scale. [~3 min]">
+<img class="logo" alt="" src="assets/57baa22b9c31.webp"><div class="ttl">Synthetic Aperture in 3D</div><div class="tag3d">3D · DRAG TO ROTATE</div><div class="stage" style="left:42px;top:112px;width:812px;height:552px"><canvas class="gl"></canvas><div class="hud"><div><span>Aperture L</span><b id="s-L">–</b></div><div><span>Antenna D</span><b id="s-d">–</b></div><div><span>Azimuth resolution</span><b id="s-r">–</b></div><div><span>Echoes combined</span><b id="s-n">–</b></div></div><div class="hint">drag: rotate · scroll: zoom · shift+drag: pan</div></div><div class="panel" style="left:872px;top:112px;width:366px"><div class="ctrl compact"><label>Antenna length D <em></em></label><input type="range" id="s-D" min="2" max="12" step="1" value="6"></div><div class="ctrl compact"><label>Satellite</label><div class="btns"><button data-pl="1" class="on">Play</button><button data-pl="0">Pause</button><button data-pl="r">Restart</button></div></div><div class="ctrl compact"><label>Image of the 2 targets</label><div class="btns"><button data-md="auto" class="on">Follow pass</button><button data-md="before">Before</button><button data-md="after">After</button></div></div><div class="ctrl compact"><label>Camera</label><div class="btns"><button data-vw="o" class="on">Overview</button><button data-vw="c">Close-up</button></div></div><div class="ctrl compact"><label>Along-track image</label><canvas class="resp" width="330" height="92"></canvas></div><div class="card3 "><h4>Why it works</h4><p>One pulse sees both targets as one blur (grey). Each echo from a new position sharpens the picture (orange) until they separate.</p><div class="eq">L ≈ λR / D</div></div></div><div class="snbox"><span class="sn"></span></div>
 </section>
 <section class="slide" data-notes="[~2 min] Because SAR carries its own illumination at microwave frequencies, it works day and night and through clouds and rain. Applications: flood mapping, sea-ice and ship monitoring, oil spills, deforestation, storm structure over oceans. The images: Typhoon Goni over the Philippines, floods in Tabasco, Istanbul and the Bosphorus, and rain cells over Estonia.">
 <img class="pic" loading="lazy" alt="" src="assets/57baa22b9c31.webp" style="left:1058.59px;top:29.14px;width:189.41px;height:50.67px;">
@@ -885,19 +885,19 @@
 <div id="notes"></div>
 <div id="chrome"><button id="prev">&larr; Prev</button><span id="pos"></span><button id="next">Next &rarr;</button><button id="nbtn" title="Speaker notes (N)">Notes</button><button id="fsbtn" title="Fullscreen (F)">Fullscreen</button><span id="brand">Radar lecture &middot; S. Eiadkaew &middot; iDEMT, KMUTNB &middot; arrows to navigate, N notes, F fullscreen</span></div>
 <script src="lib/three.min.js"></script>
-<script src="js/deck.js?v=1791903021"></script>
-<script src="js/common3d.js?v=1791903021"></script>
-<script src="js/scenes/s01_pulse.js?v=1791903021"></script>
-<script src="js/scenes/s02_rdsurface.js?v=1791903021"></script>
-<script src="js/scenes/s03_angle.js?v=1791903021"></script>
-<script src="js/scenes/s04_rotating.js?v=1791903021"></script>
-<script src="js/scenes/s05_phased.js?v=1791903021"></script>
-<script src="js/scenes/s06_mimo.js?v=1791903021"></script>
-<script src="js/scenes/s07_acc.js?v=1791903021"></script>
-<script src="js/scenes/s08_sar.js?v=1791903021"></script>
-<script src="js/scenes/s09_weather.js?v=1791903021"></script>
-<script src="js/scenes/s10_gpr.js?v=1791903021"></script>
-<script src="js/scenes/s11_vitals.js?v=1791903021"></script>
-<script src="js/scenes/s12_urban.js?v=1791903021"></script>
+<script src="js/deck.js?v=1792478725"></script>
+<script src="js/common3d.js?v=1792478725"></script>
+<script src="js/scenes/s01_pulse.js?v=1792478725"></script>
+<script src="js/scenes/s02_rdsurface.js?v=1792478725"></script>
+<script src="js/scenes/s03_angle.js?v=1792478725"></script>
+<script src="js/scenes/s04_rotating.js?v=1792478725"></script>
+<script src="js/scenes/s05_phased.js?v=1792478725"></script>
+<script src="js/scenes/s06_mimo.js?v=1792478725"></script>
+<script src="js/scenes/s07_acc.js?v=1792478725"></script>
+<script src="js/scenes/s08_sar.js?v=1792478725"></script>
+<script src="js/scenes/s09_weather.js?v=1792478725"></script>
+<script src="js/scenes/s10_gpr.js?v=1792478725"></script>
+<script src="js/scenes/s11_vitals.js?v=1792478725"></script>
+<script src="js/scenes/s12_urban.js?v=1792478725"></script>
 </body>
 </html>
