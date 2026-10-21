@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="data:,">
 <title>Radar: How It Works, Where It Is Used, and My Research</title>
-<link rel="stylesheet" href="css/deck.css?v=1792478725">
+<link rel="stylesheet" href="css/deck.css?v=1792546312">
 </head>
 <body>
 <div id="bar"></div>
@@ -527,7 +527,7 @@
 <div class="shp" style="left:28.8px;top:681.6px;width:1123.2px;height:28.8px;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:2.88px 4.80px 2.88px 4.80px;box-sizing:border-box;"><p style="margin:0;margin-top:0.00px;margin-bottom:8.00px;text-align:left;line-height:1.2;"><span class="" style="font-size:13.33px;color:#6B7585;">Image credits: NOAA Photo Library (Public domain) · The Bushranger (CC BY-SA 4.0) · US National Weather Service (Public domain) · Nicaraguan Institute of Territoria (Public domain)</span></p></div></div>
 </section>
 <section class="slide s3d" data-scene="weather" data-notes="A weather radar scans in azimuth at several elevation angles (tilts). Points light up as the beam passes through the storm cells. Reflectivity mode: warmer colours = heavier rain. Doppler mode: green toward, red away; the middle storm contains a rotating core (red-green couplet). Illustrative synthetic data. [~2 min]">
-<img class="logo" alt="" src="assets/57baa22b9c31.webp"><div class="ttl">Weather Radar Volume Scan</div><div class="tag3d">3D · DRAG TO ROTATE</div><div class="stage" style="left:42px;top:112px;width:812px;height:552px"><canvas class="gl"></canvas><div class="hud"><div><span>Elevation</span><b id="w-el">–</b></div><div><span>Azimuth</span><b id="w-az">–</b></div><div><span>Beam max</span><b id="w-mx">–</b></div><div><span>Tilt</span><b id="w-sc">–</b></div></div><div class="hint">drag: rotate · scroll: zoom · shift+drag: pan</div></div><div class="panel" style="left:872px;top:112px;width:366px"><div class="ctrl"><label>Colour by</label><div class="btns"><button data-wm="ref" class="on">Reflectivity (dBZ)</button><button data-wm="vel">Doppler velocity</button></div></div><div class="ctrl"><label>Scan speed <em></em></label><input type="range" id="w-spd" min="0.5" max="3" step="0.5" value="1"></div><div class="card3 "><h4>Volume scan</h4><p>The dish makes a full rotation at one elevation, tilts up, and repeats. Together the sweeps build a 3D picture of the storm.</p></div><div class="card3 lb"><h4>Doppler</h4><p>Green = moving toward the radar, red = moving away. A tight red/green pair marks rotation inside a storm.</p></div></div><div class="snbox"><span class="sn"></span></div>
+<img class="logo" alt="" src="assets/57baa22b9c31.webp"><div class="ttl">Weather Radar Volume Scan</div><div class="tag3d">3D · DRAG TO ROTATE</div><div class="stage" style="left:42px;top:112px;width:812px;height:552px"><canvas class="gl"></canvas><div class="hud"><div><span>Elevation</span><b id="w-el">–</b></div><div><span>Azimuth</span><b id="w-az">–</b></div><div><span>Beam max</span><b id="w-mx">–</b></div><div><span>Tilt</span><b id="w-sc">–</b></div></div><div class="hint">drag: rotate · scroll: zoom · shift+drag: pan</div></div><div class="panel" style="left:872px;top:112px;width:366px"><div class="ctrl"><label>Colour by</label><div class="btns"><button data-wm="ref" class="on">Reflectivity (dBZ)</button><button data-wm="vel">Doppler velocity</button></div></div><div class="ctrl"><label>Scan speed <em></em></label><input type="range" id="w-spd" min="0.5" max="3" step="0.5" value="1"></div><div class="ctrl compact"><label>Radome</label><div class="btns"><button data-rd="o" class="on">Closed</button><button data-rd="t">See inside</button></div></div><div class="card3 "><h4>Volume scan</h4><p>The dish makes a full rotation at one elevation, tilts up, and repeats. Together the sweeps build a 3D picture of the storm.</p></div><div class="card3 lb"><h4>Doppler</h4><p>Green = moving toward the radar, red = moving away. A tight red/green pair marks rotation inside a storm.</p></div></div><div class="snbox"><span class="sn"></span></div>
 </section>
 <section class="slide" data-notes="[~2 min] Doppler gives wind. Dual-polarization transmits horizontal and vertical polarized pulses; the shape of raindrops, hail or snow differs, so the ratio tells what kind of precipitation it is. The image on the left is from the Thai Royal Rainmaking and Agricultural Aviation Department radar at Omkoi, a CAPPI product from January 2022. The right images show the principle and a dual-pol view of the melting layer.">
 <img class="pic" loading="lazy" alt="" src="assets/57baa22b9c31.webp" style="left:1058.59px;top:29.14px;width:189.41px;height:50.67px;">
@@ -885,19 +885,19 @@
 <div id="notes"></div>
 <div id="chrome"><button id="prev">&larr; Prev</button><span id="pos"></span><button id="next">Next &rarr;</button><button id="nbtn" title="Speaker notes (N)">Notes</button><button id="fsbtn" title="Fullscreen (F)">Fullscreen</button><span id="brand">Radar lecture &middot; S. Eiadkaew &middot; iDEMT, KMUTNB &middot; arrows to navigate, N notes, F fullscreen</span></div>
 <script src="lib/three.min.js"></script>
-<script src="js/deck.js?v=1792478725"></script>
-<script src="js/common3d.js?v=1792478725"></script>
-<script src="js/scenes/s01_pulse.js?v=1792478725"></script>
-<script src="js/scenes/s02_rdsurface.js?v=1792478725"></script>
-<script src="js/scenes/s03_angle.js?v=1792478725"></script>
-<script src="js/scenes/s04_rotating.js?v=1792478725"></script>
-<script src="js/scenes/s05_phased.js?v=1792478725"></script>
-<script src="js/scenes/s06_mimo.js?v=1792478725"></script>
-<script src="js/scenes/s07_acc.js?v=1792478725"></script>
-<script src="js/scenes/s08_sar.js?v=1792478725"></script>
-<script src="js/scenes/s09_weather.js?v=1792478725"></script>
-<script src="js/scenes/s10_gpr.js?v=1792478725"></script>
-<script src="js/scenes/s11_vitals.js?v=1792478725"></script>
-<script src="js/scenes/s12_urban.js?v=1792478725"></script>
+<script src="js/deck.js?v=1792546312"></script>
+<script src="js/common3d.js?v=1792546312"></script>
+<script src="js/scenes/s01_pulse.js?v=1792546312"></script>
+<script src="js/scenes/s02_rdsurface.js?v=1792546312"></script>
+<script src="js/scenes/s03_angle.js?v=1792546312"></script>
+<script src="js/scenes/s04_rotating.js?v=1792546312"></script>
+<script src="js/scenes/s05_phased.js?v=1792546312"></script>
+<script src="js/scenes/s06_mimo.js?v=1792546312"></script>
+<script src="js/scenes/s07_acc.js?v=1792546312"></script>
+<script src="js/scenes/s08_sar.js?v=1792546312"></script>
+<script src="js/scenes/s09_weather.js?v=1792546312"></script>
+<script src="js/scenes/s10_gpr.js?v=1792546312"></script>
+<script src="js/scenes/s11_vitals.js?v=1792546312"></script>
+<script src="js/scenes/s12_urban.js?v=1792546312"></script>
 </body>
 </html>
